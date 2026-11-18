@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" id="theme-color-meta" content="#1a2421">
+    <title>Boda Alex y Valery</title>
+
+    <!-- VISTA PREVIA AL COMPARTIR POR WHATSAPP -->
+    <meta name="description" content="Nos casamos el 05 de diciembre. Abre tu invitación y confirma tu asistencia.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alex y Valery">
+    <meta property="og:title" content="Alex y Valery">
+    <meta property="og:description" content="El gran día ha llegado">
+    <meta property="og:image" content="https://codebit-gt.github.io/Invitacion/preview.JPG">
+    <meta property="og:image:alt" content="Alex y Valery">
+    <meta property="og:locale" content="es_LA">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+
+        html, body {
+            background-color: #1a2421; /* Antes era #f4f1eb */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            max-width: 100%;
+            overscroll-behavior: none;
+            overflow-x: hidden !important;
+            transition: background-color 1.5s ease; /* Transición suave */
+        }
+
+        body {
+            min-height: 100dvh;
+        }
+        .textura-papel {
+            background-color: #f4f1eb;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+        }
+        .textura-verde {
+            background-color: #681515;
+            background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            color: #f4f1eb;
+        }
+        .font-script { font-family: 'Pinyon Script', cursive; }
+        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        
+        .hidden-scroll::-webkit-scrollbar { display: none; }
+        .hidden-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* =========================================
+           REALISMO DEL SOBRE 3D
+           ========================================= */
+        .envelope-wrapper {
+            position: relative;
+            width: 350px;
+            max-width: 95%;
+            height: 240px;
+            perspective: 1500px;
+            filter: drop-shadow(0 20px 25px rgba(0,0,0,0.5)); 
+            z-index: 10;
+        }
+
+        .envelope-back {
+            position: absolute;
+            inset: 0;
+            background-color: #7a5732;
+            background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            box-shadow: inset 0 15px 40px rgba(0,0,0,0.9);
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        .letter-container {
+            position: absolute;
+            top: 25px; /* ANTES: -0.001px. Lo bajamos para esconder las esquinas */
+            left: 12px; right: 12px; bottom: 15px;
+            z-index: 2;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+        }
+        .letter-container.slide-up {
+            transform: translateY(-145px);
+        }
+
+        /* Estilos del Collage Interior */
+        .main-card-bg {
+            position: absolute;
+            top: 0; right: 8px;
+            width: 160px; height: 190px;
+            background-color: #fdfbf7;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            transform: rotate(4deg);
+            z-index: 10;
+            padding: 8px;
+        }
+        
+        .lace-border-inner {
+            width: 100%; height: 100%;
+            border: 1.5px dashed #b8b3a5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .polaroid-wrapper {
+            position: absolute;
+            top: 15px; left: 5px;
+            width: 135px; height: 165px;
+            background-color: white;
+            padding: 8px 8px 30px 8px;
+            box-shadow: -4px 6px 12px rgba(0,0,0,0.4);
+            transform: rotate(-6deg);
+            z-index: 20;
+        }
+        
+        .polaroid-wrapper img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .date-badge-wrapper {
+            position: absolute;
+            bottom: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+
+        .date-badge {
+            background-color: #e4decb;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+            padding: 10px 24px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #d4cebb;
+        }
+
+        /* Solapas del sobre */
+        .flap {
+            position: absolute;
+            background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            border-radius: 2px;
+        }
+        
+        .flap-left {
+            top: 0; left: 0; bottom: 0; width: 55%;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            z-index: 3;
+            background-color: #B88C64;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05), rgba(0,0,0,0.3)), url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+        }
+        
+        .flap-right {
+            top: 0; right: 0; bottom: 0; width: 55%;
+            clip-path: polygon(100% 0, 0 50%, 100% 100%);
+            z-index: 3;
+            background-color: #B88C64;
+            background-image: linear-gradient(to left, rgba(255,255,255,0.05), rgba(0,0,0,0.3)), url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+        }
+        
+        .flap-bottom {
+            bottom: 0; left: 0; right: 0; height: 60%;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            z-index: 4;
+            background-color: #B88C64;
+            background-image: linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.3) 100%), url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            filter: drop-shadow(0 -4px 10px rgba(0,0,0,0.4));
+        }
+        
+        .flap-top {
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 62%;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: 5;
+            background-color: #B88C64;
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.2) 100%), url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            transform-origin: top;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.6));
+        }
+        
+        .flap-top.open {
+            transform: rotateX(90deg);
+            opacity: 0;
+        }
+
+        /* NUEVA: SOLAPA SUPERIOR (TRASERA - Forma el triángulo de fondo) */
+        .flap-top-up {
+            position: absolute;
+            bottom: 100%; /* Se coloca justo encima del sobre */
+            left: 0; right: 0; height: 62%;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%); /* Triángulo apuntando arriba */
+            z-index: 0; /* Se queda al fondo de todo el conjunto */
+            background-color: #B88C64; /* Más oscura por ser la cara interior */
+            background-image: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%), url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
+            transform-origin: bottom;
+            transform: rotateX(90deg); /* Doblada hacia atrás (oculta) */
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            filter: drop-shadow(0 -4px 10px rgba(0,0,0,0.3));
+        }
+
+        /* Cuando se abre, se endereza para quedar como fondo */
+        .flap-top-up.open {
+            transform: rotateX(0deg);
+            opacity: 1;
+        }
+
+        /* CONFIGURACIÓN DEL SELLO */
+        #wax-seal-container {
+            position: absolute;
+            left: 50%;
+            top: 61%; /* Posición inicial cerrando las solapas */
+            transform: translate(-50%, -50%);
+            width: 105px;
+            height: 105px;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+        }
+        
+        #wax-seal-container:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            filter: drop-shadow(0 10px 16px rgba(0,0,0,0.8));
+        }
+
+        /* Sello Abierto: Baja al 40% (justo en la punta del triángulo inferior) y se hace pequeño */
+        #wax-seal-container.open {
+            top: 45%;
+            transform: translate(-50%, -50%) scale(0.5);
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+            pointer-events: none; /* Ya no es clicable al abrirse */
+        }
+
+        #wax-seal-container img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+
+        .guest-name {
+            position: absolute;
+            bottom: -50px;
+            left: 0; right: 0;
+            text-align: center;
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2rem;
+            color: #eae4d8;
+            z-index: 6;
+            pointer-events: none;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+            transition: opacity 0.3s ease;
+        }
+
+        .open-text {
+            position: absolute;
+            bottom: -90px;
+            left: 0; right: 0;
+            text-align: center;
+            transition: opacity 0.3s ease;
+        }
+        /* =========================================
+           ANIMACIÓN DEL VINILO GIRANDO
+           ========================================= */
+        @keyframes spinVinyl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .vinyl-spinning {
+            animation: spinVinyl 4s linear infinite;
+        }
+        
+        input::-webkit-calendar-picker-indicator { opacity: 0.6; cursor: pointer; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+
+    <div id="app-container" class="w-full max-w-none mx-0 relative h-[100dvh] overflow-hidden bg-[#f4f1eb]">
+        
+        <!-- FONDO CLARO DE PAPEL (Permanente en el fondo) -->
+        <div class="absolute inset-0 textura-papel z-0"></div>
+
+        <!-- FONDO OSCURO ESPACIAL (Capa superior inicial, se desvanece) -->
+        <div id="dark-bg" class="absolute inset-0 z-10 bg-[#1a2421] transition-opacity duration-1000 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/stardust.png');"></div>
+
+        <!-- CONTENEDOR SCROLL PRINCIPAL -->
+        <div id="scroll-wrapper" class="absolute inset-0 z-20 overflow-hidden hidden-scroll scroll-smooth">
+
+            <!-- POSICIONADOR DEL SOBRE (Empieza en el centro y viaja hacia arriba) -->
+            <div id="envelope-positioner" class="relative flex justify-center mt-[25vh] transition-all duration-1000 ease-in-out z-20">
+                
+                <!-- El Sobre -->
+                <div class="envelope-wrapper scale-[0.98] sm:scale-103 md:scale-118 relative z-10">
+                    
+
+                    <div class="envelope-back"></div>
+
+                    <!-- NUEVA SOLAPA TRASERA PARA EL EFECTO ABIERTO -->
+                    <div id="flap-top-up" class="flap-top-up"></div>
+                    
+                    <div id="letter" class="letter-container">
+                        <div class="main-card-bg">
+                            <div class="lace-border-inner">
+                                <span class="font-script text-[42px] text-[#2f4f2f] -mb-3">Alex</span>
+                                <span class="font-script text-3xl text-[#2f4f2f]">&</span>
+                                <span class="font-script text-[42px] text-[#2f4f2f] -mt-3">Valery</span>
+                            </div>
+                        </div>
+                        <div class="polaroid-wrapper">
+                            <!-- FOTO MINIATURA DEL SOBRE -->
+                            <img src="fotoanillo1.jpeg" alt="Foto Pareja">
+                        </div>
+                        <div class="date-badge-wrapper">
+                            <div class="date-badge">
+                                <svg class="w-8 h-5 mx-auto mb-1 text-[#2f4f2f]" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="14" cy="12" r="7"/>
+                                    <circle cx="26" cy="12" r="7"/>
+                                </svg>
+                                <p class="font-cinzel text-[13px] text-[#2f4f2f] tracking-widest font-bold">05 . 12 . 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flap flap-left"></div>
+                    <div class="flap flap-right"></div>
+                    <div class="flap flap-bottom"></div>
+                    <div id="flap-top" class="flap flap-top"></div>
+
+                    <div id="guest-name" class="guest-name"></div>
+                    
+                     <!-- Sello de Cera (Se ajusta dinámicamente) -->
+                    <div id="wax-seal-container" onclick="abrirSobre()">
+                        <img src="sello_sin_fondo.png" alt="Sello de Cera">
+                    </div>
+                    
+                    <div id="open-text" class="open-text font-cinzel text-xs tracking-[0.2em] text-[#dcd7cc] opacity-80 pointer-events-none">
+                        TOCA EL SELLO PARA ABRIR
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETALLES DE LA INVITACIÓN (Ocultos inicialmente, aparecen con fade) -->
+            <div id="invitation-details" class="hidden opacity-0 transition-opacity duration-1000 mt-12 pb-20 relative z-10 w-full flex-col items-center">
+                
+                <!-- Reproductor de Vinilo -->
+                <div class="flex flex-col items-center mb-10 mt-6">
+                    <!-- CAMBIA "cancion.mp3" POR EL ARCHIVO DE TU CANCIÓN -->
+                    <audio id="wedding-song" src="cancion.mp3" preload="auto" loop></audio>
+
+                    <div onclick="toggleMusic()" class="w-28 h-28 bg-[#141414] rounded-full flex items-center justify-center shadow-[0_12px_28px_rgba(0,0,0,0.45)] relative cursor-pointer hover:scale-105 transition-transform border-[3px] border-[#2a2a2a] select-none">
+                        
+                        <!-- Disco que gira (con reflejo cónico visible) -->
+                        <div id="vinyl-disc" class="w-full h-full rounded-full relative flex items-center justify-center overflow-hidden"
+                            style="background: conic-gradient(from 0deg, #111 0deg, #3a3a3a 35deg, #111 75deg, #111 180deg, #424242 215deg, #111 255deg, #111 360deg);">
+                            
+                            <!-- Surcos marcados -->
+                            <div class="absolute inset-2 rounded-full border border-white/15"></div>
+                            <div class="absolute inset-4 rounded-full border border-white/10"></div>
+                            <div class="absolute inset-6 rounded-full border border-white/20"></div>
+                            <div class="absolute inset-8 rounded-full border border-white/10"></div>
+
+                            <!-- Aro interior terracota que gira con el disco para dar referencia visual -->
+                            <div class="w-12 h-12 rounded-full bg-[#b75d3e] border-2 border-[#d3cbb9] flex items-center justify-center relative shadow-md">
+                                <div class="w-full h-[2px] bg-[#f4f1eb]/70 rotate-45"></div>
+                            </div>
+                        </div>
+
+                        <!-- Centro fijo con botones Play / Pause -->
+                        <div class="absolute w-8 h-8 bg-[#f4f1eb] rounded-full flex items-center justify-center shadow-md border border-[#d3cbb9] z-10">
+                            <svg id="icon-play" class="w-4 h-4 text-[#2f4f2f] ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="icon-pause" class="w-4 h-4 text-[#b75d3e] hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </div>
+                    </div>
+
+                    <p id="vinyl-text" class="font-cinzel text-[10px] tracking-[0.2em] text-[#2f4f2f] mt-6 text-center leading-relaxed">
+                        DALE PLAY PARA ESCUCHAR<br>NUESTRA CANCIÓN
+                    </p>
+                </div>
+
+                <!-- Icono de Deslizar -->
+                <div class="flex flex-col items-center mb-14">
+                    <div class="flex justify-center mb-2">
+                       <svg class="w-5 h-5 text-[#2f4f2f] animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7l4-4m0 0l4 4m-4-4v18" />
+                       </svg>
+                    </div>
+                    <p class="font-cinzel text-[9px] tracking-[0.2em] text-[#2f4f2f]">DESLIZA HACIA ARRIBA</p>
+                </div>
+
+                <!-- Textos Iniciales -->
+                <div class="text-center px-6 mb-12 w-full">
+                    <h1 class="font-script text-[46px] leading-none mb-4 text-[#b75d3e]">Con la Bendición de Dios</h1>
+                    <p class="font-cinzel text-[10px] tracking-[0.2em] text-[#b75d3e] mb-8 font-bold">Y DE NUESTROS PADRES,</p>
+                    <p class="font-serif-elegant text-sm uppercase tracking-[0.15em] leading-loose text-[#2f4f2f]">
+                        Tenemos el honor de<br>invitarles a nuestra boda
+                    </p>
+                </div>
+
+                <!-- Contador -->
+                <div class="text-center px-6 mb-10 w-full">
+                    <p class="font-cinzel text-[9px] tracking-[0.2em] font-bold text-[#4a5d4e] mb-6">FALTA TAN SOLO:</p>
+                    <div class="flex justify-center items-center space-x-3 font-serif-elegant text-3xl text-[#2f4f2f]">
+                        <div class="text-center"><span id="dias">00</span><p class="text-[8px] font-cinzel mt-2 tracking-widest text-[#2f4f2f]">DÍAS</p></div><span class="text-[#2f4f2f] mb-5 pb-1">:</span>
+                        <div class="text-center"><span id="horas">00</span><p class="text-[8px] font-cinzel mt-2 tracking-widest text-[#2f4f2f]">HORAS</p></div><span class="text-[#2f4f2f] mb-5 pb-1">:</span>
+                        <div class="text-center"><span id="minutos">00</span><p class="text-[8px] font-cinzel mt-2 tracking-widest text-[#2f4f2f]">MINUTOS</p></div><span class="text-[#2f4f2f] mb-5 pb-1">:</span>
+                        <div class="text-center"><span id="segundos">00</span><p class="text-[8px] font-cinzel mt-2 tracking-widest text-[#2f4f2f]">SEGUNDOS</p></div>
+                    </div>
+                </div>
+
+                <!-- FOTOS EXTRA: Arcos Superpuestos -->
+                <div class="flex justify-center items-center gap-3 px-6 mb-16 w-full">
+                    <div class="w-36 h-55 rounded-t-full overflow-hidden border-4 border-[#d3cbb9] shadow-lg transform -translate-y-4 bg-gray-200">
+                        <img src="fotonueva1.jpg" alt="Alex y Valery" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-36 h-55 rounded-t-full overflow-hidden border-4 border-[#d3cbb9] shadow-lg transform translate-y-4 bg-gray-200">
+                        <img src="fotonueva2.jpg" alt="Alex y Valery" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Bloque de Fotos y Versículo -->
+                <div class="w-full relative bg-[#4a5d4e] mb-12">
+                    <!-- FOTO PANORÁMICA 1 -->
+                    <img src="manoanillo.JPG" alt="Pareja 1" class="w-full h-72 object-cover opacity-80 mix-blend-overlay border-y-2 border-[#d3cbb9]">
+                    
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center text-white">
+                        <p class="font-serif-elegant text-[13px] uppercase tracking-[0.1em] leading-loose drop-shadow-md">
+                            "Quien halla esposa encuentra el bien,<br>y recibe el favor del Señor."
+                        </p>
+                        <p class="font-cinzel text-[9px] tracking-widest mt-4 opacity-90">PROVERBIOS 18:22</p>
+                        <p class="font-script text-4xl mt-6 opacity-90">AV</p>
+                    </div>
+                </div>
+
+                <!-- Detalles de Boda -->
+
+                <!-- Detalles de Boda -->
+                <div class="py-6 px-6 text-center w-full">
+
+                    <h2 class="font-serif-elegant text-3xl tracking-widest mb-10 text-[#b75d3e]">
+                        DETALLES<br>DE LA BODA
+                    </h2>
+
+                    <ul class="text-left font-serif-elegant italic text-[#2f4f2f] space-y-3 mb-10 inline-block text-sm">
+                        <li class="border-b border-[#2f4f2f] pb-2">
+                            FECHA: Sábado, 05 de Diciembre 2026
+                        </li>
+                        <li class="border-b border-[#2f4f2f] pb-2">
+                            LUGAR: La Hacienda Chuacorral, Chuacorral, Joyabaj, El Quiche
+                        </li>
+                        <li class="pb-2">
+                            HORA: 4:00 pm
+                        </li>
+                    </ul>
+
+                    <!-- Botones de Acción -->
+                    <div class="flex flex-col space-y-3 mx-4 mb-10">
+
+                        <!-- Título de ubicación -->
+                        <p class="font-cinzel text-sm tracking-widest text-[#2f4f2f] mb-2">
+                            ENCUENTRA CÓMO LLEGAR
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-3">
+
+                            <!-- WAZE -->
+                            <a href="https://ul.waze.com/ul?ll=14.98078100%2C-90.84335100&navigate=yes&utm_campaign=live_map&utm_source=waze_website&utm_medium=lm_share_location"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="bg-[#eae4d8] border border-[#d3cbb9] rounded-full px-2 py-4 shadow-sm flex flex-col items-center justify-center hover:opacity-80 transition-all duration-300">
+
+                                <img
+                                    src="https://cdn.simpleicons.org/waze/2F4F2F"
+                                    alt="Waze"
+                                    class="w-9 h-9 mb-2 object-contain"
+                                >
+
+                                <p class="font-cinzel text-sm font-bold text-[#2f4f2f]">
+                                    WAZE
+                                </p>
+
+                                <p class="font-serif-elegant text-[9px] italic text-gray-600 mt-1">
+                                    Presiona aqui para abrir en waze
+                                </p>
+                            </a>
+
+                            <!-- GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/EsQhA2eLzGAdSC1x5"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="bg-[#eae4d8] border border-[#d3cbb9] rounded-full px-2 py-4 shadow-sm flex flex-col items-center justify-center hover:opacity-80 transition-all duration-300">
+
+                                <img
+                                    src="https://cdn.simpleicons.org/googlemaps/2f4f2f"
+                                    alt="Google Maps"
+                                    class="w-9 h-9 mb-2 object-contain"
+                                >
+
+                                <p class="font-cinzel text-sm font-bold text-[#2f4f2f] text-center">
+                                    GOOGLE MAPS
+                                </p>
+
+                                <p class="font-serif-elegant text-[9px] italic text-gray-600 mt-1">
+                                    Presiona aqui para abrir en Google Maps
+                                </p>
+                            </a>
+
+                        </div>
+                        
+
+                        <!-- Botón Calendario -->
+                        <button onclick="downloadICS()"
+                                type="button"
+                                class="bg-[#b75d3e] text-[#eae4d8] border border-[#d3cbb9] rounded-full px-6 py-3 shadow-sm text-center block hover:opacity-80 transition-opacity w-full">
+
+                            <p class="font-cinzel text-base font-bold">
+                                AGREGAR AL CALENDARIO
+                            </p>
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <!-- ========================================== -->
+                <!-- NUEVO ITINERARIO CON IMAGEN DE FONDO       -->
+                <!-- ========================================== -->
+                <div class="w-full relative bg-[#2b352d] mb-4 text-[#f4f1eb]">
+                    <!-- FOTO DE FONDO DEL ITINERARIO -->
+                    <img src="itinerario.JPG" alt="Fondo Itinerario" class="absolute inset-0 w-full h-full object-cover opacity-20 border-y-2 border-[#d3cbb9]">
+                    
+                    <div class="py-16 px-8 relative z-10">
+                        <h2 class="font-serif-elegant text-3xl tracking-widest text-center mb-10 text-[#d3cbb9]">ITINERARIO</h2>
+                        
+                        <div class="relative border-l-2 border-[#d3cbb9]/50 ml-4 pl-8 space-y-10">
+                            <!-- Evento 1 -->
+                            <div class="relative">
+                                <div class="absolute -left-[39px] top-1 w-4 h-4 rounded-full bg-[#d3cbb9] border-2 border-[#2b352d] shadow-sm"></div>
+                                <div class="flex justify-between items-start">
+                                    <p class="font-serif-elegant text-lg tracking-wider">Ceremonia</p>
+                                    <p class="font-cinzel text-xs tracking-widest text-[#d3cbb9] mt-1 font-bold">4:00 PM</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Evento 2 -->
+                            <div class="relative">
+                                <div class="absolute -left-[39px] top-1 w-4 h-4 rounded-full bg-[#8b6551] border-2 border-[#2b352d] shadow-sm"></div>
+                                <div class="flex justify-between items-start">
+                                    <p class="font-serif-elegant text-lg tracking-wider">Recepción</p>
+                                    <p class="font-cinzel text-xs tracking-widest text-[#d3cbb9] mt-1 font-bold">6:30 PM</p>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- FIN ITINERARIO                             -->
+                <!-- ========================================== -->
+
+                <!-- Dress Code -->
+                <!-- DESPUÉS -->
+                <div class="py-12 px-6 w-full mt-6 overflow-hidden">
+
+                    <div class="flex items-center mb-8">
+                        <h3 class="font-serif-elegant text-xl tracking-widest mr-4 text-[#2f4f2f]">DRESS CODE</h3>
+                        <hr class="flex-grow border-gray-400">
+                    </div>
+
+                    <p class="font-serif-elegant text-[#2f4f2f] mb-8 ml-2">
+                        Tipo de vestimenta: Formal
+                    </p>
+
+                    <div class="mb-4 space-y-6">
+
+                        <!-- TARJETA MUJERES -->
+                        <div class="flex items-start bg-white/60 p-4 rounded-xl shadow-sm border border-gray-200 w-full">
+
+                            <a href="https://www.pinterest.com/search/pins/?q=vestidos%20formales%20boda%20oto%C3%B1o%20terracota"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex flex-col items-center mr-3 w-20 shrink-0 hover:opacity-75 transition-opacity">
+
+                                <div class="w-12 h-12 rounded-full border-2 border-[#a5b2bd] p-1 flex items-center justify-center bg-white shadow-sm mb-1">
+
+                                    <div class="w-full h-full rounded-full bg-[#a5b2bd] flex items-center justify-center">
+
+                                        <!-- SVG VESTIDO ELEGANTE -->
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 100 120"
+                                            class="w-7 h-7"
+                                            fill="black"
+                                            stroke="black"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round">
+
+                                            <!-- Tirantes -->
+                                            <path d="M38 8 L34 25 L25 38"/>
+                                            <path d="M62 8 L66 25 L75 38"/>
+
+                                            <!-- Escote -->
+                                            <path d="M38 8 Q50 28 62 8"/>
+
+                                            <!-- Cuerpo del vestido -->
+                                            <path d="M25 38 L40 45 L60 45 L75 38"/>
+
+                                            <!-- Cintura -->
+                                            <path d="M40 45 Q50 49 60 45"/>
+
+                                            <!-- Falda -->
+                                            <path d="M40 45
+                                                    Q35 72 15 108
+                                                    Q50 115 85 108
+                                                    Q65 72 60 45"/>
+
+                                            <!-- Detalle de falda -->
+                                            <path d="M50 49 Q48 78 50 111"/>
+
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <span class="font-cinzel text-xs font-bold text-[#2f4f2f] text-center mt-1">
+                                    MUJERES
+                                </span>
+
+                            </a>
+
+                            <div class="flex-1 min-w-0 pt-2">
+                                <p class="font-serif-elegant text-[16px] text-[#2f4f2f]">
+                                    Vestidos largos o de coctel.
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <!-- TARJETA HOMBRES -->
+                        <div class="flex items-start bg-white/60 p-4 rounded-xl shadow-sm border border-gray-200 w-full">
+                            <a href="https://www.pinterest.com/search/pins/?q=traje%20formal%20hombre%20boda%20oto%C3%B1o"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex flex-col items-center mr-3 w-20 shrink-0 hover:opacity-75 transition-opacity">
+                                
+                                <div class="w-12 h-12 rounded-full border-2 border-[#a5b2bd] p-1 flex items-center justify-center bg-white shadow-sm mb-1">
+                                    <div class="w-full h-full rounded-full bg-[#a5b2bd] flex items-center justify-center">
+                                        
+                                        <!-- SVG TRAJE FORMAL (Diseño sólido y elegante) -->
+                                        <svg viewBox="0 0 448 512" fill="black" class="w-6 h-6 mt-0.5">
+                                            <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136 32-56h-96l32 56-32 136-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-128.2-133.8z"/>
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <span class="font-cinzel text-xs font-bold text-[#2f4f2f] text-center mt-1">
+                                    HOMBRES
+                                </span>
+                            </a>
+
+                            <div class="flex-1 min-w-0 pt-2">
+                                <p class="font-serif-elegant text-[16px] text-[#2f4f2f]">
+                                    Traje de vestir formal.
+                                </p>
+                            </div>
+                        </div>
+
+
+                    <!-- Colores que no debes usar -->
+                        <div class="flex flex-col items-center justify-center mb-6 text-center">
+                            <div class="flex items-center mb-4">
+                                <svg class="w-10 h-10 text-black mr-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                </svg>
+                                <h4 class="font-serif-elegant text-xl tracking-widest text-[#2f4f2f]">COLORES QUE NO DEBES USAR</h4>
+                            </div>
+                            <p class="font-serif-elegant text-sm text-[#2f4f2f] px-2 mb-6 leading-relaxed">
+                                Por favor, evita usar cualquier tono de blanco, marfil, crema o cafe, ya que son los colores reservados para los novios.
+                            </p>
+                            <div class="flex justify-center gap-3">
+                                <div class="w-12 h-12 bg-[#ffffff] border border-gray-800"></div>
+                                <div class="w-12 h-12 bg-[#e8e2d4] border border-gray-800"></div>
+                                <div class="w-12 h-12 bg-[#f4f2e6] border border-gray-800"></div>
+                                <div class="w-12 h-12 bg-[#f8f5eb] border border-gray-800"></div>
+                                <div class="w-12 h-12 bg-[#985114] border border-gray-800"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RSVP: 100% Automático (Sin caja de búsqueda) -->
+                <div id="rsvp" class="py-16 px-6 text-center bg-[#e0dcd1] border-b border-[#d3cbb9] w-full">
+                    <div class="max-w-lg mx-auto">
+                        <h2 class="font-serif-elegant text-3xl tracking-widest mb-4 text-[#2f4f2f]">CONFIRMAR<br>ASISTENCIA</h2>
+                        
+                        <div id="instrucciones-rsvp" class="bg-white/40 border border-gray-300 rounded-lg p-5 mb-8 text-left max-w-sm mx-auto shadow-sm">
+                            <ul class="font-serif-elegant text-[13px] text-[#2f4f2f] space-y-3">
+                                <li class="flex items-start">
+                                    <span class="mr-2 font-bold text-[#2f4f2f]">1.</span> 
+                                    Revisa los pases asignados a tu nombre.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mr-2 font-bold text-[#2f4f2f]">2.</span> 
+                                    Marca únicamente a las personas que asistirán.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- MENSAJE DE CARGA -->
+                        <div id="cargando-rsvp" class="max-w-sm mx-auto text-center py-8">
+                            <p class="font-serif-elegant text-[#4a5d4e] italic animate-pulse">Cargando tus pases...</p>
+                        </div>
+
+                        <!-- MENSAJE DE ERROR (Oculto al inicio) -->
+                        <div id="error-rsvp" class="max-w-sm mx-auto text-center py-8 hidden">
+                            <p class="font-serif-elegant text-red-600 text-sm">Lo sentimos, no pudimos cargar tus pases. Por favor, contacta a los novios directamente.</p>
+                        </div>
+
+                        <!-- FORMULARIO DE CHECKBOXES (Oculto al inicio) -->
+                        <form id="rsvp-form" class="max-w-sm mx-auto text-left hidden">
+                            <input type="hidden" id="fila-sheet">
+                            
+                            <label class="block font-cinzel text-xs font-bold mb-2 text-[#2f4f2f]">PASES ASIGNADOS PARA:</label>
+                            <p id="nombre-encontrado" class="font-script text-3xl mb-4 text-[#2b352d]"></p>
+                            
+                            <div id="lista-acompanantes" class="space-y-3 mb-8 bg-white/60 p-4 border border-gray-300 rounded-lg shadow-sm">
+                                <!-- Los Checkboxes se inyectarán aquí automáticamente -->
+                            </div>
+
+                            <button type="submit" class="w-full bg-[#4a5d4e] text-white font-cinzel tracking-widest py-4 mt-2 hover:bg-[#3e4f42] transition-colors shadow-md font-bold">
+                                ENVIAR CONFIRMACIÓN
+                            </button>
+                        </form>
+
+                        <!-- TARJETA DE AGRADECIMIENTO (aparece al confirmar) -->
+                        <div id="gracias-rsvp" class="hidden max-w-sm mx-auto rounded-3xl bg-[#375034] px-6 py-8 text-center shadow-lg">
+                            <p id="gracias-titulo" class="text-[#b8924a] text-[44px] leading-tight" style="font-family: 'Great Vibes', 'Pinyon Script', cursive;">¡Gracias por confirmar!</p>
+                            <p id="gracias-texto" class="mt-3 text-white text-[17px] leading-snug" style="font-family: 'Montserrat', sans-serif;">Hemos guardado tu respuesta. ¡Nos vemos el 05 de diciembre!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer con línea personalizada y firma de marca -->
+                <footer class="w-full px-6 pt-16 pb-10 flex flex-col items-center justify-center text-center">
+                    <p class="w-full text-center font-cinzel text-sm tracking-widest text-[#2b352d]">
+                        ¡ LOS ESPERAMOS !
+                    </p>
+                    <p class="block w-full text-center font-script text-5xl mt-6 mb-14 text-[#4a5d4e]">
+                        AV
+                    </p>
+
+                    <!-- Línea divisoria (cambia #b75d3e/30 por el color que prefieras) -->
+                    <div class="w-full max-w-xs border-t border-[#b75d3e]/30 pt-6 flex flex-col items-center">
+                        <a href="https://codebit-gt.github.io" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="group inline-flex flex-col items-center opacity-60 hover:opacity-100 transition-opacity duration-300">
+                            <span class="font-cinzel text-[9px] tracking-[0.25em] text-[#4a5d4e] uppercase">
+                                Invitación diseñada por
+                            </span>
+                            <span class="font-cinzel text-xs font-bold tracking-[0.2em] text-[#2f4f2f] group-hover:text-[#b75d3e] transition-colors mt-1">
+                                CodeBit
+                            </span>
+                        </a>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        // =========================================================
+        // LÓGICA DEL REPRODUCTOR DE VINILO
+        // =========================================================
+        function toggleMusic() {
+            const audio = document.getElementById('wedding-song');
+            const vinyl = document.getElementById('vinyl-disc');
+            const iconPlay = document.getElementById('icon-play');
+            const iconPause = document.getElementById('icon-pause');
+            const vinylText = document.getElementById('vinyl-text');
+
+            if (audio.paused) {
+                audio.play().then(() => {
+                    vinyl.classList.add('vinyl-spinning');
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                    vinylText.innerHTML = 'PAUSAR<br>NUESTRA CANCIÓN';
+                }).catch(error => {
+                    console.error("Error al reproducir el audio:", error);
+                });
+            } else {
+                audio.pause();
+                vinyl.classList.remove('vinyl-spinning');
+                iconPlay.classList.remove('hidden');
+                iconPause.classList.add('hidden');
+                vinylText.innerHTML = 'DALE PLAY PARA ESCUCHAR<br>NUESTRA CANCIÓN';
+            }
+        }
+
+        // LÓGICA DE ANIMACIÓN UNIFICADA
+        function abrirSobre() {
+            const flapTop = document.getElementById('flap-top');
+            const flapTopUp = document.getElementById('flap-top-up');
+            const sealContainer = document.getElementById('wax-seal-container');
+            const letter = document.getElementById('letter');
+            const openText = document.getElementById('open-text');
+
+            // 1. Ocultar los textos de interacción y el nombre de invitado
+            document.getElementById('guest-name').style.opacity = '0';
+            openText.style.opacity = '0';
+ 
+            // 2. Transición del sello de cera (NO desaparece, se reduce y baja)
+            sealContainer.classList.add('open');
+
+
+
+            // 3. Sistema de 2 Solapas para asegurar el triángulo de fondo
+            flapTop.classList.add('open');    // Cierra la frontal
+            flapTopUp.classList.add('open');  // Levanta la trasera para que quede el triángulo apuntando arriba
+
+            // 3. Deslizar la tarjeta (Collage) hacia arriba
+            setTimeout(() => {
+                letter.classList.add('slide-up');
+            }, 400); 
+
+            // 4. Activar la transición principal de layout
+            setTimeout(() => {
+                // Empiezan a caer las hojas de otoño
+                if (window.iniciarHojasOtono) window.iniciarHojasOtono();
+                document.getElementById('dark-bg').style.opacity = '0';
+
+                // NUEVO: Transicionar los márgenes y barra del navegador al color claro
+                document.body.style.backgroundColor = '#f4f1eb';
+                document.documentElement.style.backgroundColor = '#f4f1eb';
+                document.getElementById('theme-color-meta').setAttribute('content', '#f4f1eb');
+                            
+                // Mover el sobre arriba con un amplio margen
+                const positioner = document.getElementById('envelope-positioner');
+                positioner.classList.remove('mt-[25vh]'); 
+                positioner.classList.add('mt-40'); 
+                
+
+                // Activar el resto de la invitación
+                const details = document.getElementById('invitation-details');
+                details.classList.remove('hidden');
+                details.classList.add('flex');
+                
+                setTimeout(() => {
+                    details.style.opacity = '1';
+                }, 50);
+
+                setTimeout(() => {
+                    const scrollWrapper = document.getElementById('scroll-wrapper');
+                    scrollWrapper.classList.remove('overflow-hidden');
+                    scrollWrapper.classList.add('overflow-y-auto', 'overflow-x-hidden');
+                }, 1000); 
+
+            }, 1800); 
+        }
+
+        // LÓGICA PARA MOSTRAR DATOS BANCARIOS
+        function toggleBankDetails() {
+            const box = document.getElementById('bank-details-box');
+            box.classList.toggle('show');
+            // Hacer un pequeño scroll hacia los datos para que el usuario los vea
+            if(box.classList.contains('show')) {
+                setTimeout(() => {
+                    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        // DESCARGA DE CALENDARIO CORREGIDA (Compatible con iPhone y Android)
+        function downloadICS() {
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Boda Alex y Valery
+DTSTART:20261205T173000
+DTEND:20261205T230000
+LOCATION:LA Hacienda Chuacorral\\, Chuacorral\\, JOYABAJ\\, EL QUICHE
+DESCRIPTION:¡Nos casamos! Te esperamos para celebrar juntos este día tan especial. Dress Code: Formal.
+END:VEVENT
+END:VCALENDAR`;
+            
+            // Detecta si es dispositivo Apple (iOS Safari)
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            
+            if (isIOS) {
+                // En iPhone usamos un enlace Data URI que es aceptado nativamente por la App Calendario
+                const uri = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+                window.location.href = uri;
+            } else {
+                // En Android / PC usamos la forma estándar de descarga
+                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'boda_alex_y_valery.ics';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            }
+        }
+
+        // Contador
+        const countDownDate = new Date("Dec 05, 2026 17:30:00").getTime();
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if(distance < 0) return clearInterval(x);
+
+            document.getElementById("dias").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("horas").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutos").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("segundos").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+
+        // =========================================================
+        // LÓGICA RSVP (Google Apps Script vía JSONP, sin problemas de CORS)
+        // =========================================================
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMCo9UUa2gS4HbuTjism19nufW74z1l3MaHACOsZqVKM3byeFF_1LpMsv41Tj9tz_k/exec';
+
+        // Nombre del invitado tomado del link (?invitado=Nombre%20Apellido)
+        const nombreInvitadoUrl = (new URLSearchParams(window.location.search).get('invitado') || '').trim();
+
+        function mostrarErrorRsvp() {
+            document.getElementById('cargando-rsvp').classList.add('hidden');
+            document.getElementById('error-rsvp').classList.remove('hidden');
+        }
+
+        // Google Apps Script llama a esta función con los datos del invitado
+        function recibirDatosInvitado(invitado) {
+            clearTimeout(window.__rsvpTimeout);
+
+            if (!invitado || invitado.error) {
+                mostrarErrorRsvp();
+                return;
+            }
+
+            document.getElementById('cargando-rsvp').classList.add('hidden');
+            document.getElementById('rsvp-form').classList.remove('hidden');
+
+            document.getElementById('nombre-encontrado').textContent = invitado.nombre;
+            document.getElementById('fila-sheet').value = invitado.row;
+
+            // Dibujar un checkbox por persona (invitado principal + acompañantes)
+            const contenedor = document.getElementById('lista-acompanantes');
+            contenedor.innerHTML = '';
+            [invitado.nombre, ...(invitado.acompanantes || [])].forEach((persona) => {
+                const label = document.createElement('label');
+                label.className = 'flex items-center space-x-3 cursor-pointer p-2 hover:bg-white/80 rounded transition-colors';
+
+                const cb = document.createElement('input');
+                cb.type = 'checkbox';
+                cb.value = persona;
+                cb.checked = true;
+                cb.className = 'asistente-cb form-checkbox h-5 w-5 text-[#4a5d4e] border-gray-400 rounded focus:ring-[#4a5d4e]';
+
+                const span = document.createElement('span');
+                span.className = 'font-serif-elegant text-[15px] text-gray-800';
+                span.textContent = persona;
+
+                label.appendChild(cb);
+                label.appendChild(span);
+                contenedor.appendChild(label);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelopeName = document.getElementById('guest-name');
+
+            // 1. El nombre en el sobre se muestra de inmediato, sin esperar a Google
+            if (!nombreInvitadoUrl) {
+                envelopeName.textContent = 'Nuestra Boda';
+                mostrarErrorRsvp();
+                return;
+            }
+            envelopeName.textContent = nombreInvitadoUrl;
+
+            // 2. Pedir a Google Sheets los acompañantes de ESTE invitado
+            const scriptTag = document.createElement('script');
+            scriptTag.src = SCRIPT_URL
+                + '?nombre=' + encodeURIComponent(nombreInvitadoUrl)
+                + '&callback=recibirDatosInvitado'
+                + '&_=' + Date.now();
+            scriptTag.onerror = mostrarErrorRsvp;
+            document.body.appendChild(scriptTag);
+
+            // Si Google no responde en 15 segundos, mostrar el error
+            window.__rsvpTimeout = setTimeout(mostrarErrorRsvp, 15000);
+        });
+
+        // 3. Enviar confirmación de vuelta a Sheets
+        document.getElementById('rsvp-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerText = 'ENVIANDO...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            const marcados = Array.from(document.querySelectorAll('.asistente-cb:checked')).map(cb => cb.value);
+            const fila = document.getElementById('fila-sheet').value;
+            const nombreEncontrado = document.getElementById('nombre-encontrado').textContent;
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        'action': 'update',
+                        'fila': fila,
+                        'nombre_principal': nombreEncontrado,
+                        'asistencia': marcados.length > 0 ? 'Si' : 'No podre asistir',
+                        'numero_asistentes': marcados.length,
+                        'nombres_confirmados': marcados.join(', ')
+                    })
+                });
+
+                // Cerrar el apartado de confirmación y mostrar el agradecimiento
+                if (marcados.length === 0) {
+                    document.getElementById('gracias-titulo').textContent = 'Gracias por avisarnos';
+                    document.getElementById('gracias-texto').textContent = 'Hemos guardado tu respuesta. ¡Lamentamos que no puedas acompañarnos!';
+                }
+                document.getElementById('instrucciones-rsvp').classList.add('hidden');
+                document.getElementById('rsvp-form').classList.add('hidden');
+                document.getElementById('gracias-rsvp').classList.remove('hidden');
+                document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (err) {
+                btn.innerText = 'ERROR, INTENTA DE NUEVO';
+                btn.style.opacity = '1';
+                btn.disabled = false;
+            }
+        });
+
+        // ===== HOJAS DE OTOÑO CAYENDO (SVG) =====
+        (function () {
+            'use strict';
+
+            /* =====================================================
+               HOJAS DE OTOÑO (SVG) - formas y colores de la foto
+               ===================================================== */
+
+            const rad = g => g * Math.PI / 180;
+            const n1 = n => Math.round(n * 10) / 10;
+            const sim = (a, L, w, p) => (a === 0 ? [[0, L, w, p]] : [[-a, L, w, p], [a, L, w, p]]);
+            // Onda triangular 0..1..0 (para los "dientes" del borde)
+            const diente = x => { const s = ((x % 1) + 1) % 1; return Math.pow(1 - Math.abs(2 * s - 1), 2); };
+
+            /* ---------- Hoja palmeada (arce, vid, etc.) ---------- */
+            function palmada(o) {
+                const cx = 50, cy = o.cy || 78, base = o.base || 20;
+                let pts = '';
+                for (let g = -160; g <= 160; g += 1.5) {
+                    let r = base;
+                    for (const [a, L, w, p] of o.lobulos) {
+                        const t = Math.abs(g - a) / w;
+                        if (t < 1) r = Math.max(r, L * (1 - Math.pow(t, p || 1.7)));
+                    }
+                    if (o.dientes && r > 20) r *= 1 + o.amp * (diente(g * o.dientes + 0.5) - 0.4);
+                    pts += (n1(cx + r * Math.sin(rad(g)))) + ' ' + (n1(cy - r * Math.cos(rad(g)))) + ' ';
+                }
+                const cuerpo = `M${cx} ${cy}L${pts}Z`;
+
+                let venas = '';
+                for (const [a, L] of o.lobulos) {
+                    if (L < 24) continue;
+                    const s = Math.sin(rad(a)), c = Math.cos(rad(a));
+                    venas += `M${cx} ${cy}L${n1(cx + 0.86 * L * s)} ${n1(cy - 0.86 * L * c)}`;
+                    if (L > 40) {
+                        for (const k of [0.42, 0.64]) {
+                            for (const d of [-38, 38]) {
+                                const px = cx + k * L * s, py = cy - k * L * c;
+                                const ar = rad(a + d), len = 0.24 * L;
+                                venas += `M${n1(px)} ${n1(py)}L${n1(px + len * Math.sin(ar))} ${n1(py - len * Math.cos(ar))}`;
+                            }
+                        }
+                    }
+                }
+                const tallo = `M${cx} ${cy}Q${cx + (o.curva || 0)} ${n1((cy + 99) / 2)} ${cx + (o.curva || 0) * 1.6} 99`;
+                return { cuerpo, venas, tallo, anchoTallo: o.anchoTallo || 2.4 };
+            }
+
+            /* ---------- Hoja alargada (roble, tilo/corazón) ---------- */
+            function alargada(o) {
+                const y0 = 90, y1 = 6, N = 90;
+                const izq = [], der = [];
+                for (let i = 0; i <= N; i++) {
+                    const t = i / N, y = y0 + (y1 - y0) * t;
+                    let hw = o.hw(t);
+                    if (o.dientes) hw *= 1 + o.amp * (diente(t * o.dientes) - 0.4);
+                    izq.push(n1(50 - hw) + ' ' + n1(y));
+                    der.push(n1(50 + hw) + ' ' + n1(y));
+                }
+                const cuerpo = `M50 ${y0}L${izq.join(' ')} ${der.reverse().join(' ')}Z`;
+
+                let venas = `M50 ${y0}L50 ${n1(y0 + (y1 - y0) * 0.94)}`;
+                for (const t of o.venasEn) {
+                    const y = y0 + (y1 - y0) * t, y2 = y0 + (y1 - y0) * (t + o.avance);
+                    const hw = o.hw(Math.min(t + o.avance, 0.98)) * 0.86;
+                    for (const s of [-1, 1]) {
+                        venas += `M50 ${n1(y)}Q${n1(50 + s * hw * 0.5)} ${n1(y - 1)} ${n1(50 + s * hw)} ${n1(y2)}`;
+                    }
+                }
+                const tallo = 'M50 ' + y0 + 'Q50 95 ' + (50 + (o.curva || 0)) + ' 99';
+                return { cuerpo, venas, tallo, anchoTallo: 2.4 };
+            }
+
+            /* ---------- Hoja compuesta (ramita con foliolos) ---------- */
+            function compuesta() {
+                const P0 = [40, 99], P1 = [44, 48], P2 = [64, 5];
+                const B = s => [
+                    (1 - s) * (1 - s) * P0[0] + 2 * (1 - s) * s * P1[0] + s * s * P2[0],
+                    (1 - s) * (1 - s) * P0[1] + 2 * (1 - s) * s * P1[1] + s * s * P2[1]
+                ];
+                const ang = s => {
+                    const dx = 2 * (1 - s) * (P1[0] - P0[0]) + 2 * s * (P2[0] - P1[0]);
+                    const dy = 2 * (1 - s) * (P1[1] - P0[1]) + 2 * s * (P2[1] - P1[1]);
+                    return Math.atan2(dy, dx) * 180 / Math.PI;
+                };
+                const foliolo = (l, w) =>
+                    `M0 0C${n1(l * .25)} ${-w} ${n1(l * .7)} ${n1(-w * .95)} ${l} 0C${n1(l * .7)} ${n1(w * .95)} ${n1(l * .25)} ${w} 0 0Z`;
+                const nervios = (l, w) => {
+                    let d = `M0 0L${n1(l * .94)} 0`;
+                    for (const k of [.28, .46, .64, .8]) {
+                        d += `M${n1(l * k)} 0L${n1(l * (k + .12))} ${n1(-w * .72)}M${n1(l * k)} 0L${n1(l * (k + .12))} ${n1(w * .72)}`;
+                    }
+                    return d;
+                };
+                let cuerpo = '', venas = '';
+                const poner = (s, delta, l, w) => {
+                    const [x, y] = B(s), a = ang(s) + delta;
+                    const tr = `transform="translate(${n1(x)} ${n1(y)}) rotate(${n1(a)})"`;
+                    cuerpo += `<path ${tr} d="${foliolo(l, w)}"/>`;
+                    venas += `<path ${tr} d="${nervios(l, w)}"/>`;
+                };
+                for (let i = 0; i < 6; i++) {
+                    const s = 0.14 + i * 0.125, l = 31 - i * 3.2, w = 7.2 - i * 0.55;
+                    poner(s, -58, l, w);
+                    poner(s + 0.06, 58, l, w);
+                }
+                poner(0.99, 0, 20, 5.4); // foliolo terminal
+                return { compuesta: true, cuerpo, venas, tallo: `M${P0[0]} ${P0[1]}Q${P1[0]} ${P1[1]} ${P2[0]} ${P2[1]}`, anchoTallo: 1.8 };
+            }
+
+            /* ---------- Los 10 tipos de la foto, con sus colores ---------- */
+            const TIPOS = [
+                // 1. Arce naranja
+                { color: ['#e47a3c', '#b5501f'], forma: palmada({ cy: 76, curva: -2, dientes: 1 / 6, amp: 0.05, lobulos: [...sim(0, 66, 30, 2.3), ...sim(50, 60, 28, 2.3), ...sim(98, 40, 26, 2.3)] }) },
+                // 2. Arce rojo
+                { color: ['#c63a33', '#8c2024'], forma: palmada({ cy: 74, curva: 2, dientes: 1 / 7, amp: 0.05, lobulos: [...sim(0, 64, 29, 2.1), ...sim(54, 62, 28, 2.1), ...sim(104, 38, 26, 2.1)] }) },
+                // 3. Vid / hoja oliva oscura (lóbulos redondeados)
+                { color: ['#6e6425', '#443d12'], forma: palmada({ cy: 70, curva: 4, base: 24, dientes: 1 / 14, amp: 0.05, lobulos: [...sim(0, 58, 34, 3), ...sim(64, 54, 34, 3), ...sim(120, 32, 28, 2.6)] }) },
+                // 4. Arce rojizo (tallo largo)
+                { color: ['#c4663a', '#93441f'], forma: palmada({ cy: 62, curva: -6, anchoTallo: 1.6, dientes: 1 / 6, amp: 0.05, lobulos: [...sim(0, 56, 27, 2.2), ...sim(52, 54, 26, 2.2), ...sim(102, 34, 24, 2.2)] }) },
+                // 5. Hoja de tilo (corazón con nervadura fina)
+                {
+                    color: ['#9b8f50', '#6f6535'], forma: alargada({
+                        hw: t => 39 * Math.pow(Math.sin(Math.PI * Math.pow(t, 0.72)), 1.1), dientes: 22, amp: 0.04,
+                        venasEn: [0.12, 0.24, 0.36, 0.48, 0.6, 0.72], avance: 0.14, curva: -6
+                    })
+                },
+                // 6. Hoja compuesta verde
+                { color: ['#58806a', '#355d49'], forma: compuesta() },
+                // 7. Roble amarillo
+                {
+                    color: ['#dcab43', '#b0801f'], forma: alargada({
+                        hw: t => 26 * Math.pow(Math.sin(Math.PI * Math.pow(t, 1.15)), 0.8) * (0.5 + 0.5 * Math.pow(0.5 - 0.5 * Math.cos(2 * Math.PI * 3.6 * t), 0.75)),
+                        venasEn: [0.14, 0.3, 0.46, 0.62, 0.78], avance: 0.1
+                    })
+                },
+                // 8. Hoja marrón (3 lóbulos apuntados)
+                { color: ['#9c5d3f', '#6b3722'], forma: palmada({ cy: 66, curva: -5, anchoTallo: 2, dientes: 1 / 9, amp: 0.05, lobulos: [...sim(0, 64, 26, 2), ...sim(52, 52, 26, 2), ...sim(104, 30, 22, 2)] }) },
+                // 9. Hoja oliva-amarilla (3 lóbulos anchos)
+                { color: ['#b9aa62', '#8a7c37'], forma: palmada({ cy: 76, curva: 2, lobulos: [...sim(0, 64, 34, 1.9), ...sim(62, 58, 32, 1.9), ...sim(116, 26, 26, 1.9)] }) },
+                // 10. Hoja verde (3 lóbulos con borde dentado)
+                { color: ['#5f7f49', '#3a5a2c'], forma: palmada({ cy: 72, curva: 3, dientes: 1 / 11, amp: 0.05, lobulos: [...sim(0, 62, 32, 2.2), ...sim(60, 54, 32, 2.2), ...sim(112, 30, 26, 2.2)] }) }
+            ];
+
+            function construirSVG(tipo, i) {
+                const f = tipo.forma, rel = 'url(#hoja-grad-' + i + ')', c2 = tipo.color[1];
+                const cuerpo = f.compuesta
+                    ? `<g fill="${rel}">${f.cuerpo}</g>`
+                    : `<path d="${f.cuerpo}" fill="${rel}"/>`;
+                // venas finas: una línea oscura delicada + un reflejo muy tenue
+                const venas = f.compuesta
+                    ? `<g fill="none" stroke="rgba(40,20,5,.30)" stroke-width=".7" stroke-linecap="round">${f.venas}</g>`
+                    : `<path d="${f.venas}" fill="none" stroke="rgba(40,20,5,.28)" stroke-width=".9" stroke-linecap="round"/>` +
+                      `<path d="${f.venas}" fill="none" stroke="rgba(255,240,215,.22)" stroke-width=".5" stroke-linecap="round" transform="translate(.6 .6)"/>`;
+                const tallo = `<path d="${f.tallo}" fill="none" stroke="${c2}" stroke-width="${f.anchoTallo * 0.7}" stroke-linecap="round"/>`;
+                return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;overflow:visible">${tallo}${cuerpo}${venas}</svg>`;
+            }
+
+            // Degradados (definidos una sola vez, las hojas los reutilizan)
+            const DEFS = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>' +
+                TIPOS.map((t, i) => `<linearGradient id="hoja-grad-${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${t.color[0]}"/><stop offset="1" stop-color="${t.color[1]}"/></linearGradient>`).join('') +
+                '</defs></svg>';
+
+
+            const SVGS = TIPOS.map(construirSVG);
+
+            /* =====================================================
+               CAÍDA DE LAS HOJAS
+               ===================================================== */
+            let hojasIniciadas = false;
+            function iniciarHojas() {
+                if (hojasIniciadas) return;
+                hojasIniciadas = true;
+                const MAX_HOJAS = 22;
+                const rnd = (a, b) => a + Math.random() * (b - a);
+
+                const contenedor = document.createElement('div');
+                contenedor.setAttribute('aria-hidden', 'true');
+                contenedor.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden;';
+                contenedor.innerHTML = DEFS;
+                document.body.appendChild(contenedor);
+
+                const estilos = document.createElement('style');
+                estilos.textContent = `
+                    .hoja-caida {
+                        position: absolute; top: 0; left: 0;
+                        will-change: transform, opacity;
+                        filter: drop-shadow(0 2px 2px rgba(60,30,10,.16));
+                        animation: hoja-caida var(--dur) linear forwards;
+                    }
+                    .hoja-vaiven {
+                        width: 100%; height: 100%;
+                        animation: hoja-vaiven var(--vaiven) ease-in-out infinite alternate;
+                    }
+                    .hoja-giro {
+                        width: 100%; height: 100%;
+                        animation: hoja-giro var(--giro) ease-in-out infinite alternate;
+                    }
+                    @keyframes hoja-caida {
+                        0%   { transform: translate3d(0, -70px, 0); opacity: 0; }
+                        10%  { opacity: .88; }
+                        85%  { opacity: .88; }
+                        100% { transform: translate3d(var(--dx), calc(100vh + 70px), 0); opacity: 0; }
+                    }
+                    @keyframes hoja-vaiven {
+                        from { transform: translateX(calc(var(--amp) * -1)); }
+                        to   { transform: translateX(var(--amp)); }
+                    }
+                    @keyframes hoja-giro {
+                        from { transform: rotate(var(--r0)) perspective(180px) rotateY(0deg); }
+                        to   { transform: rotate(var(--r1)) perspective(180px) rotateY(var(--ry)); }
+                    }
+                `;
+                document.head.appendChild(estilos);
+
+                function crearHoja(adelantada) {
+                    if (document.hidden || contenedor.childElementCount >= MAX_HOJAS) return;
+
+                    const dur = rnd(13, 22);
+                    const tam = rnd(22, 38);
+                    const r0 = rnd(-40, 40);
+
+                    const hoja = document.createElement('div');
+                    hoja.className = 'hoja-caida';
+                    hoja.style.left = rnd(-3, 97) + 'vw';
+                    hoja.style.width = hoja.style.height = tam + 'px';
+                    hoja.style.setProperty('--dur', dur + 's');
+                    hoja.style.setProperty('--dx', rnd(-60, 60) + 'px');
+                    // Las primeras hojas ya van a mitad de camino para que no empiece vacío
+                    if (adelantada) hoja.style.animationDelay = (-rnd(0, dur * 0.8)) + 's';
+
+                    hoja.innerHTML =
+                        '<div class="hoja-vaiven" style="--vaiven:' + rnd(3.5, 6) + 's;--amp:' + rnd(8, 18) + 'px">' +
+                        '<div class="hoja-giro" style="--giro:' + rnd(3.5, 6) + 's;--r0:' + r0 + 'deg;--r1:' + (r0 + rnd(25, 70) * (Math.random() < .5 ? -1 : 1)) + 'deg;--ry:' + rnd(35, 60) * (Math.random() < .5 ? -1 : 1) + 'deg">' +
+                        SVGS[Math.floor(Math.random() * SVGS.length)] +
+                        '</div></div>';
+
+                    hoja.addEventListener('animationend', e => { if (e.target === hoja) hoja.remove(); });
+                    contenedor.appendChild(hoja);
+                }
+
+                // Primeras hojas escalonadas desde arriba, luego una nueva cada 1.3 s
+                for (let i = 0; i < 5; i++) setTimeout(() => crearHoja(false), i * 500);
+                setInterval(() => crearHoja(false), 1300);
+            }
+
+            // Se activan cuando se abre el sobre (ver abrirSobre)
+            window.iniciarHojasOtono = iniciarHojas;
+        })();
+    </script>
+</body>
+</html>
